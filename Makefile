@@ -6,6 +6,7 @@ CXX		:=g++
 CFLAGS		:=-O3 -fexpensive-optimizations -funroll-loops -ffast-math -fno-strict-aliasing -Wall -pipe
 CXXFLAGS	=$(CFLAGS)
 
+include ./pre.mk
 
 # set installation options
 ifeq ($(PREFIX),)
