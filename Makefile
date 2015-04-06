@@ -1,16 +1,35 @@
 #Makefile MUPEN64 for Linux
 
-CC		=gcc
-CXX		=g++
+CC		:=gcc
+CXX		:=g++
 
-#CFLAGS		=-DX86 -O3 -mpentium -Wall -DEMU64_DEBUG
-CFLAGS		=-DX86 -O3 -fexpensive-optimizations -fomit-frame-pointer -funroll-loops -ffast-math -fno-strict-aliasing -mcpu=athlon -Wall -pipe
-#CFLAGS		=-DX86 -O3 -mcpu=pentium -Wall -g -pg
-#CFLAGS		=-DX86 -Wall -pipe -g3 -DEMU64_DEBUG
-#CFLAGS		=-DX86 -Wall -pipe -g -DEMU64_DEBUG -DCOMPARE_CORE
-#CFLAGS		=-DX86 -Wall -pipe -g
-
+CFLAGS		:=-O3 -fexpensive-optimizations -funroll-loops -ffast-math -fno-strict-aliasing -Wall -pipe
 CXXFLAGS	=$(CFLAGS)
+
+
+# set installation options
+ifeq ($(PREFIX),)
+  PREFIX := /usr/
+  CFLAGS += -DWITH_HOME="$(PREFIX)"
+endif
+
+ifeq ($(CPU), X86)
+ifneq ($(ARCH), 64BITS)
+  CFLAGS +=-DX86 -mmmx -msse -march=i686
+ifneq ($(PROFILE), 1)
+  CFLAGS += -fomit-frame-pointer
+endif
+endif
+    # tweak flags for 32-bit build on 64-bit system
+ifeq ($(ARCH), 64BITS_32)
+  CFLAGS += -m32
+  LDFLAGS += -m32 -m elf_i386
+endif
+endif
+ifeq ($(CPU_ENDIANNESS), BIG)
+  CFLAGS += -D_BIG_ENDIAN
+endif
+
 
 GL_PATH		=-I/usr/X11R6/include
 
@@ -405,7 +424,7 @@ install:
 	
 clean:
 	find . -name '*.o' -print0 | xargs -0r rm -f
-	rm mupen64 mupen64_nogui mupen64_dbg plugins/mupen64_input.so blight_input/arial.ttf.c blight_input/ttftoh plugins/blight_input.so plugins/mupen64_hle_rsp_azimer.so plugins/dummyaudio.so plugins/mupen64_audio.so plugins/jttl_audio.so plugins/mupen64_soft_gfx.so plugins/glN64.so
+	rm -f mupen64 mupen64_nogui mupen64_dbg plugins/mupen64_input.so blight_input/arial.ttf.c blight_input/ttftoh plugins/blight_input.so plugins/mupen64_hle_rsp_azimer.so plugins/dummyaudio.so plugins/mupen64_audio.so plugins/jttl_audio.so plugins/mupen64_soft_gfx.so plugins/glN64.so
 
 clean_o:
 	find . -name '*.o' -print0 | xargs -0r rm -f
