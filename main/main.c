@@ -33,10 +33,12 @@
 
 // Emulateur Nintendo 64, MUPEN64, Fichier Principal 
 // main.c
-#define VERSION "0.5\0"
+#define VERSION "0.5.1\0"
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <dirent.h>
+#include <sys/stat.h>	
 
 #include "main.h"
 #include "guifuncs.h"
@@ -666,7 +668,7 @@ int main (int argc, char *argv[])
 	i4 = old_i + atoi(s) - 1;
      }
    
-   printf("\n\nSelected Plugins: %s, %s, %s, %s\n", plugins[i1], plugins[i2], plugins[3], plugins[i4]);
+   printf("\n\nSelected Plugins: %s, %s, %s, %s\n", plugins[i1], plugins[i2], plugins[i3], plugins[i4]);
    
    plugin_load_plugins(plugins[i1], plugins[i2], plugins[i3], plugins[i4]);
    romOpen_gfx();
