@@ -172,6 +172,11 @@ DllAbout( HWND hParent )
 
 static void GetPluginDir(char *Directory)
 {
+#ifdef WITH_HOME
+   strcpy(Directory, getenv("HOME"));
+   strcat(Directory, "/.mupen64/");
+   strcat(Directory, "plugins/");
+#else
    int n = readlink("/proc/self/exe", Directory, PATH_MAX);
    if (n == -1)
      strcpy(Directory, "./");
@@ -182,6 +187,7 @@ static void GetPluginDir(char *Directory)
 	  Directory[strlen(Directory)-1] = '\0';
      }
    strcat(Directory, "plugins/");
+#endif
 }
 
 #ifdef USE_GTK
