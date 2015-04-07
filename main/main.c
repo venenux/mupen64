@@ -162,8 +162,8 @@ static int filter(const SDL_Event *event)
 	   case SDLK_ESCAPE:
 	     stop_it();
 	     break;
-	   case SDLK_F1:
-	     changeWindow();
+	   case SDLK_RETURN:
+    	    if(event->key.keysym.mod & (KMOD_LALT | KMOD_RALT)){    changeWindow();}
 	     break;
 	   default:
 	     switch (event->key.keysym.unicode)
@@ -208,8 +208,6 @@ static int filter(const SDL_Event *event)
 	switch (event->key.keysym.sym)
 	  {
 	   case SDLK_ESCAPE:
-	     break;
-	   case SDLK_F1:
 	     break;
 	   default:
 	     keyUp(0, event->key.keysym.sym);
