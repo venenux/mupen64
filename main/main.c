@@ -290,14 +290,14 @@ int main (int argc, char *argv[])
 	strcat(temp, "plugins");
 	mkdir(temp, 0700);
 	strcpy(orig, WITH_HOME);
-	strcat(orig, "share/mupen64/plugins");
+	strcat(orig, "lib/mupen64/plugins");
 	dir = opendir(orig);
 	while((entry = readdir(dir)) != NULL)
 	  {
 	     if(strcmp(entry->d_name + strlen(entry->d_name) - 3, ".so"))
 	       {
 		  strcpy(orig, WITH_HOME);
-		  strcat(orig, "share/mupen64/plugins/");
+		  strcat(orig, "lib/mupen64/plugins/");
 		  strcat(orig, entry->d_name);
 		  src = fopen(orig, "rb");
 		  if(src == NULL) continue;
@@ -323,7 +323,7 @@ int main (int argc, char *argv[])
 		  strcat(temp, "plugins/");
 		  strcat(temp, entry->d_name);
 		  strcpy(orig, WITH_HOME);
-		  strcat(orig, "share/mupen64/plugins/");
+		  strcat(orig, "lib/mupen64/plugins/");
 		  strcat(orig, entry->d_name);
 		  symlink(orig, temp);
 	       }

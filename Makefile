@@ -187,6 +187,7 @@ endif
 
 PREFIX		=$(shell grep WITH_HOME config.h | cut -d '"' -f 2)
 SHARE		="$(PREFIX)share/mupen64/"
+LIBPLUG		="$(PREFIX)lib/mupen64/"
 
 PLUGINS		=plugins/mupen64_input.so plugins/blight_input.so plugins/mupen64_hle_rsp_azimer.so plugins/dummyaudio.so plugins/mupen64_audio.so plugins/jttl_audio.so plugins/mupen64_soft_gfx.so plugins/glN64.so
 
@@ -420,7 +421,7 @@ install:
 	mkdir "$(SHARE)" | echo
 	cp -rv mupen64.ini "$(SHARE)"
 	cp -rv lang "$(SHARE)"
-	cp -rv plugins "$(SHARE)"
+	cp -rv plugins "$(LIBPLUG)"
 	cp -rv doc "$(SHARE)"
 	
 clean:
