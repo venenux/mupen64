@@ -3,7 +3,7 @@
 CC		:=gcc
 CXX		:=g++
 
-CFLAGS		:=-O3 -fexpensive-optimizations -funroll-loops -ffast-math -fno-strict-aliasing -Wall -pipe
+CFLAGS		:=-O3 -fexpensive-optimizations -funroll-loops -ffast-math -fno-strict-aliasing -Wall -g -pipe
 CXXFLAGS	=$(CFLAGS)
 
 include ./pre.mk
@@ -16,7 +16,7 @@ endif
 
 ifeq ($(CPU), X86)
 ifneq ($(ARCH), 64BITS)
-  CFLAGS +=-DX86 -mmmx -msse -march=i686
+  CFLAGS +=-DX86 -mmmx -msse -march=i686 -DX86_ASM -fPIC -fomit-frame-pointer
 ifneq ($(PROFILE), 1)
   CFLAGS += -fomit-frame-pointer
 endif
