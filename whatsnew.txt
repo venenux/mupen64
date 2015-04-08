@@ -1,3 +1,22 @@
+what's new in 0.5.1
+
+  - Core
+    + Fix command line arguments parsing in non-interactive mode
+    + fix compilation with gcc 4.1, 4.3, 4.4 and 4.6, does not able to compile with 4.7+
+    + change toggle fulscreen as ALT+ENTER event the F1 as now in desktop help call
+    + pluguins into lib event share, install in share only indep files if multiuser mode
+    + Can load plugins from others, but compatible with old versino of mupen64
+    + Can load plugins of other emulators (0.4 > mupen64 > 0.5 or mupen64plus << 1.6)
+  - GTK gui
+    + really stop when closing emulation window in graphical interface (no rom still opened)
+    + no segfault when closing emulation window in graphical interface if open other rom
+    + change toggle fulscreen as ALT+ENTER event the F1 as now in desktop help call
+  - Sound plguins
+    + workaround for audio config save settings bug
+    + fix SDL_ttf error builds and linker
+  - RSP
+    + fix memory register error when compiling with newer gcc, register has rewerved word
+
 what's new in 0.5:
   - Core
     + detection of invalid code cache for ambiguous region now use
